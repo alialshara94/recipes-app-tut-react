@@ -4,20 +4,22 @@ import Recipe from './Recipe';
 
 const App = () => {
 
+  const APP_ID = "e292c5c2";
+  const APP_KEY = "d0d99372369cc71c1056e6e714046c73";
 
   // const API_URI = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`;
 
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("chicken");
+  const [query, setQuery] = useState("");
 
   
 
   useEffect(() => {
     const getRecipes = async () => {
-      const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`);
+      const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
       const data = await response.json();
-      console.log('data', data.hits);
+      // console.log('data', data.hits);
       setRecipes(data.hits);
     };
     getRecipes();
@@ -31,7 +33,7 @@ const App = () => {
   };
 
   const getSearch =e =>{
-    e.preventDefault();
+    e.preventDefualt();
     setQuery(search);
   }
 
@@ -43,9 +45,8 @@ const App = () => {
       </form>
       {recipes.map(recipe => (
         <Recipe
-          key={recipe.recipe.label}
-          title={recipe.recipe.label}
-          ingredients={recipe.recipe.ingredients}
+          key={recipe.recipe.lable}
+          title={recipe.recipe.lable}
           calories={recipe.recipe.calories}
           image={recipe.recipe.image}
         />
